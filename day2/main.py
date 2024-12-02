@@ -12,14 +12,28 @@ def convert_input_to_list(file_path):
     return input_list
 
 def check_safe_unsafe(input_list):
-    count = 0
+    safe_count = 0
+    unsafe_count = 0
     increasing = True
-    decreaseing = True
-    report_num = 0
+    decreasing = True
     for level in input_list:
-        for report in level:
+        if level[0] < level[1]:
+            decreasing = False
+        else:
+            increasing = False
+        for i in range(0, len(level-1)):
+            difference = level[i] - level[i+1]
+            if abs(difference) < 1 or abs(difference) > 3:
+                break
+            if increasing == True and decreasing == False and difference < 0:
+                break
+                    
+
+            else:
+                break
             
-            report_num += 1
+                
+            
 
             
 
