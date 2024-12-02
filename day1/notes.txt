@@ -1,0 +1,7 @@
+Day1
+Psuedocode
+Accept two lists
+Order lists
+Find difference (distance) between two lists
+return total distance
+
