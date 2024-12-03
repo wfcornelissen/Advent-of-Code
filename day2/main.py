@@ -1,8 +1,9 @@
 #Red-Nosed reports
 
 def main():
-    data = convert_input_to_list("input_text.txt")
-    print(data)
+    data = convert_input_to_list("test.txt")
+    safe_count = iteration(data)
+    print(safe_count)
 
 def convert_input_to_list(file_path):
     input_list = []
@@ -11,33 +12,39 @@ def convert_input_to_list(file_path):
             input_list.append([int(x) for x in line.split()])
     return input_list
 
-def check_safe_unsafe(input_list):
+def iteration(input_list):
     safe_count = 0
-    unsafe_count = 0
-    increasing = True
-    decreasing = True
     for level in input_list:
-        if level[0] < level[1]:
-            decreasing = False
-        else:
-            increasing = False
-        for i in range(0, len(level-1)):
-            difference = level[i] - level[i+1]
-            if abs(difference) < 1 or abs(difference) > 3:
-                break
-            if increasing == True and decreasing == False and difference < 0:
-                break
-                    
+        if check_up(level):
+            if check_inc_dec(level):
+                safe_count +=1
+        elif check_down(level):
+            if check_inc_dec(level):
+                safe_count +=1
+    return safe_count
+        
+        
+def check_up(level):
+    for i in range(0, len(level)-1):
+        if level[i] > level[i+1]:
+            return False
+    return True
 
-            else:
-                break
-            
-                
-            
+def check_down(level) :
+    for i in range(0, len(level)-1):
+        if level[i] < level[i+1]:
+            return False
+    return True   
+
+def check_inc_dec(level):
+    for i in range(0, len(level)-1):
+        if abs(level[i] -level[i+1]) > 3 or abs(level[i] - level[i+1]) < 1:
+            return False
+    return True
 
             
-
-    return count
+    
+            
 
 
 
